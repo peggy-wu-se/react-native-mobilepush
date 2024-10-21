@@ -1,0 +1,28 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.reactlibrary">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application>
+        <meta-data android:name="com.alibaba.app.appkey" android:value="${pushKey}"/> <!-- 请填写你自己的- appKey -->
+        <meta-data android:name="com.alibaba.app.appsecret" android:value="${pushSecret}"/> <!-- 请填写你自己的appSecret -->
+        <meta-data android:name="xiaomiId" android:value="\${xiaomiId}"/>
+        <meta-data android:name="xiaomiKey" android:value="\${xiaomiKey}"/>
+        <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=${huaweiAppId}" />
+
+        <!-- 消息接收监听器 （用户可自主扩展） -->
+        <receiver
+                android:name=".PushReceiver"
+                android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
